@@ -1,0 +1,36 @@
+﻿@model Book
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="col-md-4">
+        <div class="form-group">
+            Category :
+            @Html.DropDownListFor(model => model.Category, new SelectList(Model.categorySelectedList, "Value", "Text"), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            ISBN :
+            @Html.TextBoxFor(model => model.isbn, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Titulo :
+            @Html.TextBoxFor(model => model.title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Descripcion :
+            @Html.TextBoxFor(model => model.description, new { @class = "form-control" })
+        </div>
+    </div>
+</div>
