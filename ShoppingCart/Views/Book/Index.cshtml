@@ -5,11 +5,60 @@
 
 <h2>Index</h2>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            SaveBook();
+        });
+    });
+
+    function ResetBook() {
+        $("#Category_Id").val("1");
+        $("#isbn").val("");
+        $("#title").val("");
+        $("#description").val("");
+        $("#author").val("");
+        $("#price").val("");
+        $("#imagePath").val("");
+    }
+
+    function SaveBook() {
+        var formData = new FormData();
+        formData.append("Category_Id", $("#Category_Id").val());
+        formData.append("isbn", $("#isbn").val());
+        formData.append("title", $("#title").val());
+        formData.append("description", $("#description").val());
+        formData.append("author", $("#author").val());
+        formData.append("price", $("#price").val());
+        formData.append("ImagePath", $("#ImagePath").get(0).files[0]);
+
+        $.ajax({
+            async: true,
+            dataType: 'JSON',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            url: '/Book/Index',
+            data: formData,
+            success: function (data) {
+                if (data.Success) {
+                    alert(data.Message);
+                    ResetBook();
+                }
+            },
+            error: function () {
+                alert("Tuvimos problemas para crear el libro");
+            }
+        })
+
+    }
+</script>
+
 <div class="container">
     <div class="col-md-4">
         <div class="form-group">
             Category :
-            @Html.DropDownListFor(model => model.Category, new SelectList(Model.categorySelectedList, "Value", "Text"), new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Category_Id, new SelectList(Model.categorySelectedList, "Value", "Text"), new { @class = "form-control" })
         </div>
     </div>
 
@@ -32,5 +81,32 @@
             Descripcion :
             @Html.TextBoxFor(model => model.description, new { @class = "form-control" })
         </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Autor :
+            @Html.TextBoxFor(model => model.author, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Price :
+            @Html.TextBoxFor(model => model.price, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Imagen :
+            @Html.TextBoxFor(model => model.ImagePath, new { type = "file", @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <input type="button" value="Guardar" name="save" class="btn btn-primary" id="btnSave" />
+        &nbsp;
+        <input type="button" value="Reset" name="reset" class="btn btn-danger" />
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,7 +25,29 @@ namespace ShoppingCart.Controllers
                     Value = objCat.Id.ToString(),
                     Selected = true
                 });
-            return View();
+            return View(book);
+        }
+
+        [HttpPost]
+        public JsonResult Index(Book objBook)
+        {
+
+            string NewImage = Guid.NewGuid() + Path.GetExtension(objBook.ImagePath.FileName);
+            objBook.ImagePath.SaveAs(Server.MapPath("~/Images/" + NewImage));
+
+            Book newBook = new Book();
+            newBook.image = "~/Images/" + NewImage;
+            newBook.isbn = objBook.isbn;
+            newBook.title = objBook.title;
+            newBook.description = objBook.description;
+            newBook.author = objBook.author;
+            newBook.price = objBook.price;
+            newBook.Category = db.Categories.First(i => i.Id==objBook.Category_Id);
+
+            db.Books.Add(newBook);
+            db.SaveChanges();
+
+            return Json(new { Success = true, Message = "Libro creado satisfactoriamente"}, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Book/Details/5

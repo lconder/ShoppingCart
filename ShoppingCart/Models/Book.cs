@@ -9,5 +9,9 @@ namespace ShoppingCart
     public partial class Book
     {
         public IEnumerable<SelectListItem> categorySelectedList { get; set; }
+
+        public HttpPostedFileBase ImagePath { get; set; }
+
+        public int Category_Id { get; set; }
     }
 }
