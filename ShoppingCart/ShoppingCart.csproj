@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Shopping.cs" />
@@ -282,6 +283,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shopping\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Shared\_ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

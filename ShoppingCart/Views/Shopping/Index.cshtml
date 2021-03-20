@@ -3,6 +3,32 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    function AddToCart(book) {
+        var bookId = $(book).attr("bookId");
+        var formData = new FormData();
+        formData.append("bookId", bookId);
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Shopping/Index',
+            success: function (data) {
+                if (data.Success) {
+                    $("#cartItem").text("Cart(" + data.Counter + ")");
+                }
+            },
+            error: function () {
+                alert('Tuvimos un problema');
+            }
+        });
+
+    }
+</script>
+
 <div class="container">
     <h2 class="text-center">Lista de Libros</h2>
     @foreach(var book in Model)
@@ -24,7 +50,7 @@
                 <b>@book.price.ToString("C")</b>
             </div>
             <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid maroon; padding: 2px">
-                <input type="button" name="AddToCart" value="Agregar al carrito" class="btn btn-primary" itemid="@book.bookId" onclick="AddToCart(this)"/>
+                <input type="button" name="AddToCart" value="Agregar al carrito" class="btn btn-primary" bookId="@book.bookId" onclick="AddToCart(this)"/>
             </div>
         </div>
      }
