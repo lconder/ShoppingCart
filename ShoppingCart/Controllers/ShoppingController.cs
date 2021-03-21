@@ -72,5 +72,16 @@ namespace ShoppingCart.Controllers
 
             return Json(new { Success = true, Counter = listOfShoppingCartModel.Count }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ShoppingCart() {
+
+            if (Session["CartCounter"] != null)
+            {
+                listOfShoppingCartModel = Session["CartItem"] as List<ShoppingCart>;
+            }
+
+            return View(listOfShoppingCartModel);
+        }
     }
+    
 }
