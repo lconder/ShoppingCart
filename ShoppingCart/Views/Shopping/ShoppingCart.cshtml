@@ -6,41 +6,44 @@
 
 <h2>ShoppingCart</h2>
 
-<table class="table-condensed" style="width: 100%"> 
-    @foreach(var book in Model)
-     {
-        TotalAmount += book.Total;
-        <tr>
-            <td>
-                <img src="@Url.Content(book.ImagePath)" height="30px" width="15px"/>
-            </td>
-            <td>
-                @book.ItemName
-            </td>
-            <td>
-                @book.Quantity
+@using (Html.BeginForm("AddOrder", "Shopping", FormMethod.Post))
+{
+    <table class="table-condensed" style="width: 100%">
+        @foreach (var book in Model)
+        {
+            TotalAmount += book.Total;
+            <tr>
+                <td>
+                    <img src="@Url.Content(book.ImagePath)" height="30px" width="15px" />
+                </td>
+                <td>
+                    @book.ItemName
+                </td>
+                <td>
+                    @book.Quantity
+                </td>
+                <td style="text-align: right">
+                    @book.UnitPrice.ToString("C")
+                </td>
+                <td style="text-align: right">
+                    @book.Total.ToString("C")
+                </td>
+            </tr>
+            }
+        <tr style="border-top: 2px solid black">
+            <td colspan="4" style="text-align: right">
+                <h3>Total</h3>
             </td>
             <td style="text-align: right">
-                @book.UnitPrice.ToString("C")
-            </td>
-            <td style="text-align: right">
-                @book.Total.ToString("C")
+                @TotalAmount.ToString("C")
             </td>
         </tr>
-     }
-    <tr style="border-top: 2px solid black">
-        <td colspan="4" style="text-align: right" >
-            <h3>Total</h3>
-        </td>
-        <td style="text-align: right">
-            @TotalAmount.ToString("C")
-        </td>
-    </tr>
 
-    <tr style="text-align: right">
-        <td colspan="5">
-            <input type="button" value="Pagar" name="Pay" class="btn btn-primary" />
-        </td>
-    </tr>
-</table>
+        <tr style="text-align: right">
+            <td colspan="5">
+                <input type="submit" value="Guardar" name="save" class="btn btn-primary" id="SaveOrder" />
+            </td>
+        </tr>
+    </table>
 
+}

@@ -27,5 +27,7 @@ namespace ShoppingCart
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

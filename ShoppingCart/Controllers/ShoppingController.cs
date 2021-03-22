@@ -82,6 +82,40 @@ namespace ShoppingCart.Controllers
 
             return View(listOfShoppingCartModel);
         }
+
+        [HttpPost]
+        public ActionResult AddOrder()
+        {
+    
+            if (Session["CartCounter"] != null)
+            {
+                listOfShoppingCartModel = Session["CartItem"] as List<ShoppingCart>;
+            }
+            Order order = new Order()
+            {
+                OrderDate = DateTime.Now,
+                OrderNumber = String.Format("{0:ddmmyyyyHHmmss}", DateTime.Now)
+            };
+            db.Orders.Add(order);
+            db.SaveChanges();
+            int orderId = order.Id;
+
+            foreach(var item in listOfShoppingCartModel)
+            {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.OrderId = orderId;
+                orderDetail.Total = item.Total;
+                orderDetail.BookId = Int32.Parse(item.bookId);
+                orderDetail.Quantity = item.Quantity;
+                orderDetail.UnitPrice = item.UnitPrice;
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+            }
+
+            Session["CartCounter"] = null;
+            Session["CartItem"] = null;
+            return RedirectToAction("Index");
+        }
     }
     
 }

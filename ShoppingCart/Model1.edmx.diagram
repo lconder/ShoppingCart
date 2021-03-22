@@ -4,11 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="088461a22b414d70961711350a135faa" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model1.Category" Width="1.5" PointX="2.25" PointY="1.125" />
-        <EntityTypeShape EntityType="Model1.Book" Width="1.5" PointX="4.75" PointY="1.125" />
+      <Diagram DiagramId="088461a22b414d70961711350a135faa" Name="Diagram1" ZoomLevel="114" >
+        <EntityTypeShape EntityType="Model1.Category" Width="1.5" PointX="2.625" PointY="1.5" />
+        <EntityTypeShape EntityType="Model1.Book" Width="1.5" PointX="7.375" PointY="4.125" />
         <AssociationConnector Association="Model1.CategoryBook" />
-      </Diagram>
+        <EntityTypeShape EntityType="Model1.Order" Width="1.5" PointX="5.875" PointY="0.625" />
+        <EntityTypeShape EntityType="Model1.OrderDetail" Width="1.5" PointX="10.125" PointY="0.625" />
+        <AssociationConnector Association="Model1.OrderOrderDetail" />
+        <AssociationConnector Association="Model1.BookOrderDetail" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
