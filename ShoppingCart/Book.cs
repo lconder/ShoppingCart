@@ -14,6 +14,12 @@ namespace ShoppingCart
     
     public partial class Book
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Book()
+        {
+            this.stock = 0;
+        }
+    
         public int Id { get; set; }
         public string isbn { get; set; }
         public string title { get; set; }
@@ -21,6 +27,7 @@ namespace ShoppingCart
         public string author { get; set; }
         public string image { get; set; }
         public double price { get; set; }
+        public long stock { get; set; }
     
         public virtual Category Category { get; set; }
     }

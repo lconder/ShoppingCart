@@ -42,6 +42,7 @@ namespace ShoppingCart.Controllers
             newBook.description = objBook.description;
             newBook.author = objBook.author;
             newBook.price = objBook.price;
+            newBook.stock = objBook.stock;
             newBook.Category = db.Categories.First(i => i.Id==objBook.Category_Id);
 
             db.Books.Add(newBook);

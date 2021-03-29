@@ -2,12 +2,11 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/21/2021 18:39:21
+-- Date Created: 03/29/2021 08:57:21
 -- Generated from EDMX file: C:\Users\Nando\Documents\projects\dotNet\ShoppingCart\ShoppingCart\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
-GO
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -20,10 +19,10 @@ IF OBJECT_ID(N'[dbo].[FK_CategoryBook]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Books] DROP CONSTRAINT [FK_CategoryBook];
 GO
 IF OBJECT_ID(N'[dbo].[FK_OrderOrderDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderDetailSet] DROP CONSTRAINT [FK_OrderOrderDetail];
+    ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK_OrderOrderDetail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BookOrderDetail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderDetailSet] DROP CONSTRAINT [FK_BookOrderDetail];
+    ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK_BookOrderDetail];
 GO
 
 -- --------------------------------------------------
@@ -36,11 +35,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Books]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Books];
 GO
-IF OBJECT_ID(N'[dbo].[OrderSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OrderSet];
+IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Orders];
 GO
-IF OBJECT_ID(N'[dbo].[OrderDetailSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OrderDetailSet];
+IF OBJECT_ID(N'[dbo].[OrderDetails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderDetails];
 GO
 
 -- --------------------------------------------------
@@ -63,6 +62,7 @@ CREATE TABLE [dbo].[Books] (
     [author] nvarchar(max)  NOT NULL,
     [image] nvarchar(max)  NOT NULL,
     [price] float  NOT NULL,
+    [stock] bigint  NOT NULL,
     [Category_Id] int  NOT NULL
 );
 GO

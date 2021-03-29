@@ -20,6 +20,7 @@ namespace ShoppingCart.Controllers
         public ActionResult Index()
         {
             IEnumerable<Shopping> list = (from objBook in db.Books
+                                          where objBook.stock>0
                                            join objCat in db.Categories 
                                            on objBook.Category.Id equals objCat.Id
                                           select new Shopping
@@ -41,10 +42,15 @@ namespace ShoppingCart.Controllers
         public JsonResult Index(string bookId) 
         {
             ShoppingCart shoppingCart = new ShoppingCart();
-            Book objBook = db.Books.Single(model => model.Id.ToString() == bookId);
-            
-            if (Session["CartCounter"] != null) {
- 
+            Book objBook = db.Books.Single(model => model.Id.ToString() == bookId && model.stock>0);
+
+            if (objBook == null) 
+            {
+                return Json(new { Success = false, Message = "No existen suficientes artículos para ser agregados." }, JsonRequestBehavior.AllowGet);
+            }
+
+            if (Session["CartCounter"] != null) 
+            {
                 listOfShoppingCartModel = Session["CartItem"] as List<ShoppingCart>;
             }
             
@@ -91,6 +97,7 @@ namespace ShoppingCart.Controllers
             {
                 listOfShoppingCartModel = Session["CartItem"] as List<ShoppingCart>;
             }
+
             Order order = new Order()
             {
                 OrderDate = DateTime.Now,
@@ -102,6 +109,12 @@ namespace ShoppingCart.Controllers
 
             foreach(var item in listOfShoppingCartModel)
             {
+                Book objBook = db.Books.First(b => b.Id.ToString() == item.bookId);
+                if (objBook != null)
+                {
+                    objBook.stock = objBook.stock - (int)item.Quantity;
+                }
+
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.OrderId = orderId;
                 orderDetail.Total = item.Total;

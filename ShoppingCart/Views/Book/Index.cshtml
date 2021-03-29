@@ -19,6 +19,7 @@
         $("#description").val("");
         $("#author").val("");
         $("#price").val("");
+        $("#stock").val("");
         $("#imagePath").val("");
     }
 
@@ -30,6 +31,7 @@
         formData.append("description", $("#description").val());
         formData.append("author", $("#author").val());
         formData.append("price", $("#price").val());
+        formData.append("stock", $("#stock").val());
         formData.append("ImagePath", $("#ImagePath").get(0).files[0]);
 
         $.ajax({
@@ -94,6 +96,13 @@
         <div class="form-group">
             Price :
             @Html.TextBoxFor(model => model.price, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Stock :
+            @Html.TextBoxFor(model => model.stock, new { @class = "form-control" })
         </div>
     </div>
 

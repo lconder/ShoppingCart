@@ -41,6 +41,7 @@
     <Property Name="author" Type="nvarchar(max)" Nullable="false" />
     <Property Name="image" Type="nvarchar(max)" Nullable="false" />
     <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="stock" Type="bigint" Nullable="false" DefaultValue="0" />
     <Property Name="Category_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Orders">
@@ -140,6 +141,7 @@
           <Property Name="author" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="image" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="stock" Type="Int64" Nullable="false" DefaultValue="0" />
         </EntityType>
         <Association Name="CategoryBook">
           <End Type="Model1.Category" Role="Category" Multiplicity="1" />
@@ -215,6 +217,7 @@
           <ScalarProperty Name="author" ColumnName="author" />
           <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
